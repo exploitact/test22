@@ -1,0 +1,13 @@
+name: Reusable workflow example
+
+on:
+  workflow_call:
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        run: |
+          "Echo is this working"
+    
