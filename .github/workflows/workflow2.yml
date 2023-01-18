@@ -2,12 +2,26 @@ name: Reusable workflow example
 
 on:
   workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+      params:
+        required: true
+        type: string
 
 jobs:
-  triage:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Dependencies
-        run: |
-          "Echo is this working"
-    
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Checkmarx One CLI Action
+        uses: checkmarx/ast-github-action@main #Github Action version
+        with:
+          cx_tenant: unitedtalent
+          project_name: ${{ inputs.config-path }}
+          base_uri: https://ast.checkmarx.net/ 
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          additional_params: ${{ inputs.params }}
