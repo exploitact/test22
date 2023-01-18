@@ -9,7 +9,12 @@ on:
       params:
         required: true
         type: string
-
+    secrets:
+      CX_CLIENT_ID:
+        required: true
+      CX_CLIENT_SECRET:
+        required: true
+        
 jobs:
   build:
     runs-on: ubuntu-latest
